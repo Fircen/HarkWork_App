@@ -1,0 +1,20 @@
+GET http://localhost:3000/
+
+### REGISTER
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+    "name": "Adam",
+    "email": "adkowal777@gmail.com",
+    "password": "1234"
+}
+
+### LOGIN
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "adkowal777@gmail.com",
+    "password": "1234"
+}
