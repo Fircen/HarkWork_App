@@ -1,15 +1,15 @@
-PATCH    http://localhost:3000/api/v1/task/2
+POST    http://localhost:3000/api/v1/task/
 Content-Type: application/json
 
 {
-    "description": " Ulepszony task",
-    "done": true
+    "description": " Ulepszony task"
 }
-
+###
+GET http://localhost:5000/api/v1/task/
 
 ###
 
-GET  http://localhost:3000/api/v1/task
+GET  https://hardworkapp.herokuapp.com/api/v1/task
 
 
 ###
