@@ -1,18 +1,22 @@
-const express = require('express');
-const res = require('express/lib/response');
-const app = express()
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const userRoutes = require('./routes/users');
-const authRoutes = require('./routes/auth');
+import express from 'express';
+//const res = require('express/lib/response');
+//const mongoose = require('mongoose');
+import dotenv from 'dotenv';
+import cors from 'cors';
+//const userRoutes = require('./routes/users');
+//const authRoutes = require('./routes/auth');
+import cookieParser from 'cookie-parser';
+import usersRouter from './routes/users-routes.js';
+import authRouter from './routes/auth-routes.js';
 
 dotenv.config();
 
-mongoose.connect(
-    process.env.DB_CONNECT,
-    { useNewUrlParser: true },
-    () => console.log('contected to database'))
+const app = express()
+
+// mongoose.connect(
+//     process.env.DB_CONNECT,
+//     { useNewUrlParser: true },
+//     () => console.log('contected to database'))
 
 const post = [
     {
@@ -31,8 +35,11 @@ app.get('/', (req, res) => {
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
-app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRouter);
+app.use("/api/auth", authRouter);
+//app.use("/api/users", userRoutes);
+//app.use("/api/auth", authRoutes);
 
 app.listen(3000);
