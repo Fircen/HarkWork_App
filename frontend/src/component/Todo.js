@@ -1,27 +1,29 @@
 import React from 'react'
 
-export default function Todo({ text }) {
+export default function Todo({ text, ID }) {
 
-    const completeHandler = (e) => {
-        e.preventDefault();
-
-        return console.log();
+    const completeHandler = () => {
 
 
-        /*
-        fetch('/api/v1/task/' + id, {
-            method: 'PUT',
+
+
+
+
+        fetch('/api/v1/task/' + ID, {
+            method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                'done': true
+                "ID": ID,
+                "description": text,
+                "done": true
             })
-        });*/
+        });
 
     }
 
 
     return (
-        <div className='todo'>
+        <div className='todo' id={ID}>
             <li className='todo-item'>{text}</li>
             <button onClick={completeHandler} className='complete-btn'>
                 <i className='fas fa-check'></i>

@@ -1,8 +1,9 @@
-POST    http://localhost:3000/api/v1/task/
+PATCH     http://localhost:3000/api/v1/task/2
 Content-Type: application/json
-
 {
-    "description": " Ulepszony task"
+  
+  "done": true
+  
 }
 ###
 GET http://localhost:5000/api/v1/task/
@@ -12,12 +13,3 @@ GET http://localhost:5000/api/v1/task/
 GET  https://hardworkapp.herokuapp.com/api/v1/task
 
 
-###
-POST http://localhost:3000/api/users/register
-Content-Type: application/json
-
-{
-    "Name": "Adam",
-    "Email": "adkowal777@gmail.com",
-    "Password": "1234"
-}

@@ -22,7 +22,7 @@ export default function ToDoList() {
         <div className='todo-container'>
             <ul className='todo-list'>
                 {task.map((tasks) => (
-                    <Todo key={tasks.id} text={tasks.description} />
+                    <Todo ID={tasks.ID} text={tasks.description} />
                 ))}
 
             </ul>
