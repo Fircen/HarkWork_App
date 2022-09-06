@@ -1,4 +1,4 @@
-const pool = require('../database')
+import pool from '../database.js';
 
 const getAllTask = async (req, res) => {
     try {

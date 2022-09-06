@@ -1,4 +1,3 @@
-import express from 'express';
 import pool from '../database.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -6,12 +5,10 @@ import {jwtTokens} from '../utils/jwt-helpers.js';
 //import { ref } from 'joi';
 //import { reset } from 'nodemon';
 
-const router = express.Router();
-
-router.post('/login', async (req, res) => {
+const loginUser = async (req, res) => {
     try {
         const {email, password} = req.body;
-        const users = await pool.query('SELECT * FROM user WHERE email = $1', [email]);
+        const users = await pool.query('SELECT * FROM users WHERE "email" = $1', [email]);
         if(users.rows.length === 0) return res.status(401).json({error:"Incorrect email!"});
 
         const validPassword = await bcrypt.compare(password, users.rows[0].password);
@@ -25,9 +22,9 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(401).json({error:error.message});
     }
-});
+};
 
-router.get('/refresh_token', (req, res) => {
+const refreshToken = (req, res) => {
     try {
         const refreshToken = req.cookies.refresh_token;
         if(refreshToken === null) return res.status(401).json({error:"Null refresh token!"});
@@ -40,15 +37,17 @@ router.get('/refresh_token', (req, res) => {
     } catch (error) {
         res.status(401).json({error:error.message});
     }
-});
+};
 
-router.delete('/logout', (req, res) => {
+const logoutUser = (req, res) => {
     try {
         res.clearCookie('refresh_token');
         return res.status(200).json({message:'Refresh token deleted!'});
     } catch (error) {
         res.status(401).json({error:error.message});
     }
-});
+};
 
-export default router;
+module.exports = {
+    loginUser, refreshToken, logoutUser
+}
