@@ -1,6 +1,6 @@
 import pool from '../database.js';
 
-const getAllTask = async (req, res) => {
+export const getAllTask = async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM task;')
         res.status(200).json(result.rows)
@@ -8,8 +8,9 @@ const getAllTask = async (req, res) => {
     catch (err) {
         console.log(err)
     }
-}
-const createTask = async (req, res) => {
+};
+
+export const createTask = async (req, res) => {
     try {
         const result = await pool.query(
             'INSERT INTO task (description) VALUES($1);', [req.body.description]);
@@ -19,16 +20,18 @@ const createTask = async (req, res) => {
     catch (err) {
         console.log(err)
     }
-}
-const getTask = async (req, res) => {
+};
+
+export const getTask = async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM task WHERE "ID"=$1', [req.params.id]);
         res.status(200).json(result.rows);
     } catch (err) {
         console.log(err)
     }
-}
-const updateTask = async (req, res) => {
+};
+
+export const updateTask = async (req, res) => {
     try {
         const result = await pool.query('UPDATE task SET done=$1 WHERE "ID"=$2',
             [req.body.done, req.params.id])
@@ -36,9 +39,9 @@ const updateTask = async (req, res) => {
     } catch (err) {
         console.log(err)
     }
-}
+};
 
-const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
     try {
         const result = await pool.query('DELETE  * FROM task WHERE "ID"=$1',
             [req.params.id])
@@ -47,7 +50,8 @@ const deleteTask = async (req, res) => {
         console.log(err)
     }
 
-}
-module.exports = {
+};
+
+export default {
     getAllTask, createTask, getTask, updateTask, deleteTask
 }

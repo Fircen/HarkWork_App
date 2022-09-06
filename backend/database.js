@@ -1,5 +1,6 @@
-const Pool = require('pg').Pool;
-const dotenv = require('dotenv');
+import pg from 'pg';
+const {Pool} = pg;
+import dotenv from 'dotenv';
 dotenv.config();
 
 const pool = new Pool({
@@ -17,4 +18,4 @@ const heroku = new Pool({
     port: 5432,
 })
 
-module.exports = pool
+export default pool;
