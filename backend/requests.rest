@@ -12,4 +12,28 @@ GET http://localhost:5000/api/v1/task/
 
 GET  https://hardworkapp.herokuapp.com/api/v1/task
 
+###
 
+GET http://localhost:5000/api/users/
+
+### REGISTER
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "name":"Adam",
+    "email":"adkowal777@gmail.com",
+    "password":"1234"
+}
+
+### LOGIN
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email":"adkowal777@gmail.com",
+    "password":"1234"
+}
+
+### LOGOUT
+DELETE http://localhost:5000/api/auth/logout
