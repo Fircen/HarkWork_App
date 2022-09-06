@@ -5,7 +5,7 @@ import {jwtTokens} from '../utils/jwt-helpers.js';
 //import { ref } from 'joi';
 //import { reset } from 'nodemon';
 
-const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
     try {
         const {email, password} = req.body;
         const users = await pool.query('SELECT * FROM users WHERE "email" = $1', [email]);
@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
     }
 };
 
-const refreshToken = (req, res) => {
+export const refreshToken = (req, res) => {
     try {
         const refreshToken = req.cookies.refresh_token;
         if(refreshToken === null) return res.status(401).json({error:"Null refresh token!"});
@@ -39,7 +39,7 @@ const refreshToken = (req, res) => {
     }
 };
 
-const logoutUser = (req, res) => {
+export const logoutUser = (req, res) => {
     try {
         res.clearCookie('refresh_token');
         return res.status(200).json({message:'Refresh token deleted!'});
@@ -48,6 +48,6 @@ const logoutUser = (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     loginUser, refreshToken, logoutUser
 }

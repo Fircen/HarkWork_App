@@ -1,7 +1,7 @@
 import pool from '../database.js';
 import bcrypt from 'bcrypt';
 
-const getUsers = async (req, res) => {
+export const getUsers = async (req, res) => {
     try {
         const users = await pool.query('SELECT * FROM users');
         res.json({users:users.rows});
@@ -10,7 +10,7 @@ const getUsers = async (req, res) => {
     }
 };
 
-const registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3)', [req.body.name, req.body.email, hashedPassword]);
@@ -20,6 +20,6 @@ const registerUser = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     getUsers, registerUser
 }
