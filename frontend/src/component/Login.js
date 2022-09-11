@@ -24,7 +24,7 @@ export default function Login1() {
         if ('accessToken' in response) {
             swal("Success", "Succesful login", "success", {
                 buttons: false,
-                timer: 2000,
+                timer: 1000,
             })
                 .then((value) => {
                     localStorage.setItem('accessToken', response['accessToken']);

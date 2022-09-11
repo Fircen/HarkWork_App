@@ -1,13 +1,24 @@
 import React from 'react'
 import Sidebar_style from '../style/Sidebar_style.css'
+import { Form, Button, Card, Container } from 'react-bootstrap'
 import { SidebarData } from './SidebarData';
 
 export default function Sidebar() {
+    
+    const logout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+        window.location.pathname = "/login";
+    }
+
     return (
         <>
             <div className='Sidebar'>
                 <div className='User'>
                     <h3 className='title'>{localStorage.getItem('user')}</h3>
+                </div>
+                <div className='Logout'>
+                    <button className="btn btn-primary" onClick={logout}>Logout</button>
                 </div>
                 <hr />
                 <div className='title'>🌐═══๑۩ Task ۩๑═══🌐</div>

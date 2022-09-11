@@ -1,0 +1,31 @@
+.middle {
+    float: left;
+    position: absolute;
+    margin-left: 250px;
+    margin-right: 250px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.messages {
+    width: 67%;
+    height: 70%;
+    top: 0px;
+    margin-bottom: 60px;
+    /* overflow-y: scroll; */
+    /* scrollbar-width: thin;
+    scrollbar-color: blue; */
+}
+
+.form-container {
+    width: 67%;
+    position: fixed;
+    bottom: 0px;
+    background-color: white;
+}
+
+.text-input {
+    margin: 10px;
+    width: 100%;
+}
