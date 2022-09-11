@@ -1,11 +1,19 @@
+///
 import express from 'express';
-const app = express()
 import dotenv from 'dotenv';
+import cors from 'cors';
+///
 import task from './routes/task.js';
 import auth from './routes/auth.js';
 import users from './routes/users.js';
+import socket from './routes/socket.js'
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+//server
+const app = express()
+const server = createServer(app);
 
 //middleware
 app.use(express.json())
@@ -18,5 +26,8 @@ dotenv.config();
 app.use('/api/v1/task', task)
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/users', users)
+app.use('/api/v1/chat', socket)
 // server
-app.listen(5000)
+server.listen(3001, () => {
+    console.log("server Run on 3001")
+})

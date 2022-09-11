@@ -3,7 +3,7 @@ import { Form, Button, Card, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import swal from 'sweetalert';
-const API_URL = 'http://localhost:5000/api/v1/auth/login';
+const API_URL = 'http://localhost:3001/api/v1/auth/login';
 
 async function loginUser(credentials) {
     return fetch(API_URL, {
