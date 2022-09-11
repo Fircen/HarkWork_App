@@ -1,7 +1,10 @@
 .online {
-    position: absolute;
-    position: right;
+    /* position: absolute;
+    position: right; */
+    position: fixed;
+    right: 250px;
     width: 250px;
     height: 100vh;
-    background-color: green;
+    background-color: #312e81;
+    margin-right: -250px;
 }

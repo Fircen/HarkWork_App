@@ -4,7 +4,7 @@ export default function OnlineUsers() {
     return (
         <>
             <div className='online'>
-                aaa
+                Users online
             </div>
         </>
     )

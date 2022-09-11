@@ -4,26 +4,21 @@ import Signup from './component/Signup';
 import Home from './component/Home';
 import { Link, Route, Router, Routes } from 'react-router-dom';
 import PrivateRoutes from './utilty/PrivateRoutes';
-import Sidebar from './component/Sidebar';
-
-import OnlineUsers from './component/Online';
+//import Sidebar from './component/Sidebar';
+//import OnlineUsers from './component/Online';
 
 export default function App() {
 
 
   return (
     <>
-      <Sidebar />
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path='/' element={<Home />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
-
       </Routes>
-
-      <OnlineUsers />
     </>
   )
 }
