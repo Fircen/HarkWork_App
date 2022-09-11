@@ -1,118 +1,85 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import jwt from 'jwt-decode';
-//import AuthContext from '../context/Auth';
+import React from 'react'
+import { Form, Button, Card, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import swal from 'sweetalert';
+const API_URL = 'http://localhost:5000/api/v1/auth/login';
 
-const API_URL = 'http://127.0.0.1:5000/api/auth/login';
+async function loginUser(credentials) {
+    return fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+        .then(data => data.json())
+}
 
-const Login = () => {
+export default function Login1() {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = async data => {
+        const response = await loginUser(data);
 
-    //const navigate = useNavigate();
-
-    //const authCtx = useContext(AuthContext);
-
-    const emailRef = useRef();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errMsg, setErrMsg] = useState('');
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        emailRef.current.focus();
-    }, [])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [email, password])
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-
-        setLoading(true);
-
-        try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
+        if ('accessToken' in response) {
+            swal("Success", "Succesful login", "success", {
+                buttons: false,
+                timer: 2000,
             })
-            console.log(JSON.stringify(response.data));
-            //const token = response.data.token;
-            //const user = jwt(token);
-            //const roles = user.role;
-            //const user_ID = user.id;
-            //localStorage.setItem('user_id', user_ID);
-            //authCtx.onLogin({token: token, id: user_ID, role: roles});
-            setEmail('');
-            setPassword('');
-            setLoading(false);
-            navigate('/');
-        } catch (err) {
-            console.log(err);
-            if (err.response.status === 401) setErrMsg('Invalid email or password!');
-            else setErrMsg('Error - could not login user!');
+                .then((value) => {
+                    localStorage.setItem('accessToken', response['accessToken']);
+                    localStorage.setItem('user', JSON.stringify(response['name']));
+                    window.location.href = "/";
+                });
+        } else {
+            swal("Failed", response.error, "error");
         }
+
     }
 
-    const handleCancel = () => {
-        navigate("/");
-    };
-
     return (
-        <section>
-            <br/>
-            <h1><strong>Sign In</strong></h1>
-            <br/>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <div>
-                        <input
-                            type="text"
-                            id="email"
-                            ref={emailRef}
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            placeholder='Email'
-                            required
-                        />
-                    </div>
-                </div>
+        <Container className='d-flex justify-content-center align-items-center h-100' style={{ minHeight: '100vh' }}>
+            <div className="w-100 " style={{ maxWidth: "600px" }}>
+                <Card className="p-5" style={{ borderRadius: '1rem' }}>
+                    <Card.Body >
+                        <h2 className='text-center mb-4'> Login</h2>
+                        <Form onSubmit={handleSubmit(onSubmit)}>
+                            <Form.Group id='email' className='mb-4 fs-4'>
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control className='form-control-lg ' type='email' required
+                                    {...register('email', {
+                                        required: true,
+                                        pattern: {
+                                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <div>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            required
-                            placeholder='Password'
-                        />
-                    </div>
-                </div>
-                <br/>
-                <button type='submit'>Sign In</button>
-                {!loading 
-                    ? null
-                    : <span>Loading...</span>}
-                {<div><h2 style={errMsg ? {color: 'red', fontWeight: 'bold'} : {display: 'none'}}>{errMsg}</h2></div>}
-                <br/><br/>
-                {/* <a type='button' onClick={handleCancel}>Go back</a>
-                <br/><br/> */}
-            </form>
-            {/* <p>
-                Need an Account?<br />
-                <span className="line">
-                    <Link to="/users/register">Sign Up</Link>
-                </span>
-            </p> */}
-            <br/>
-        </section>
-    );
-};
+                                        },
+                                    })}
+                                />
+                                {errors.email && (
+                                    <span className='text-danger fs-5'>Should be an valid email adress</span>
+                                )}
 
-export default Login;
+                            </Form.Group>
+                            <Form.Group id='password' className='mb-4 fs-4'>
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control className='form-control-lg' type='password'
+                                    {...register('password', {
+                                        required: "You must specify password",
+                                    })}
+                                />
+                                {errors.password && <span className='text-danger fs-5'>{errors.password.message}</span>}
+                            </Form.Group>
+
+
+
+                            <Button className='w-100 btn-lg' type='submit'>Login</Button>
+                        </Form>
+                    </Card.Body>
+                    <div className='w-100 text-center mb-4 fs-5 py-3'>
+                        Do not have an account?<Link to="/register">Register</Link>
+                    </div>
+                </Card>
+
+            </div>
+        </Container >)
+}

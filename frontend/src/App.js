@@ -1,35 +1,30 @@
 import React, { useState, } from 'react';
-import From from './component/Form'
-import "./App.css"
-import ToDoList from './component/ToDoList';
+import Login from './component/Login';
+import Signup from './component/Signup';
+import Home from './component/Home';
+import { Link, Route, Router, Routes } from 'react-router-dom';
+import PrivateRoutes from './utilty/PrivateRoutes';
+import Sidebar from './component/Sidebar';
+
+import OnlineUsers from './component/Online';
+
 export default function App() {
-  const [inputText, setInputText] = useState('')
-
-  /*
-    useEffect(() => {
-      async function getData() {
-        const response = await fetch(
-          '/api/v1/task'
-        )
-        let data = await response;
-  
-        console.log(data)
-      }
-      getData()
-    }, [])
-  */
-
-
 
 
   return (
-    <div className='App'>
-      <header>
-        <h1>Task</h1>
-      </header>
-      <From inputText={inputText} setInputText={setInputText} />
-      <ToDoList />
-    </div>
+    <>
+      <Sidebar />
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path='/' element={<Home />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Signup />} />
+
+      </Routes>
+
+      <OnlineUsers />
+    </>
   )
 }
 
