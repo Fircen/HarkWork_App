@@ -1,0 +1,22 @@
+.message-container {
+    border: black solid 1px;
+    margin: 10px;
+    padding: 5px;
+    width: 100%;
+}
+
+.message-info h5 {
+    color: blue;
+}
+
+.message-info span {
+    color: darkgray;
+}
+
+.message-content {
+    font-size: 15px;
+}
+
+.messages:nth-child(2n) .message-container{
+    background-color: lightgray;
+}
