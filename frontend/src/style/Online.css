@@ -1,0 +1,7 @@
+.online {
+    position: absolute;
+    position: right;
+    width: 250px;
+    height: 100vh;
+    background-color: green;
+}

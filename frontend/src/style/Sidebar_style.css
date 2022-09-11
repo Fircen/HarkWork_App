@@ -1,0 +1,78 @@
+ .Sidebar {
+     width: 250px;
+     height: 100vh;
+     background-color: #312e81;
+ }
+
+ body {
+     margin: 0;
+     padding: 0;
+ }
+
+ .List {
+     height: auto;
+     padding: 0;
+     width: 100%;
+
+ }
+
+ .List .row {
+     width: 100%;
+     height: 50px;
+     list-style-type: none;
+     margin: 0;
+     display: flex;
+     flex-direction: row;
+     color: #e1e6ff;
+     justify-content: center;
+     align-items: center;
+     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }
+
+ .List .row:hover {
+     cursor: pointer;
+     background-color: #4338ca;
+     padding: 5px;
+ }
+
+ .List #active {
+     background-color: #4338ca;
+ }
+
+
+
+ .row #title {
+     flex: 100%;
+ }
+
+ .User {
+     height: 100px;
+     width: 100%;
+     align-items: center;
+     justify-content: center;
+     display: flex;
+ }
+
+ .title {
+
+     color: #e1e6ff;
+     text-align: center;
+ }
+
+ .hr {
+     display: block;
+     height: 5px;
+
+     border: 2px solid rgb(237, 0, 0);
+     margin: 1em 0;
+     padding: 0;
+ }
+
+ .dash {
+     border: 1px solid red;
+     width: 90%;
+     margin-left: 15px;
+     margin-right: 15px;
+     height: 0px;
+
+ }
