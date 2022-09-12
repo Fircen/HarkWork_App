@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import Sidebar_style from '../style/Sidebar_style.css'
 import { Form, Button, Card, Container } from 'react-bootstrap'
-import { SidebarData } from './SidebarData';
+const API_URL = 'http://localhost:3001/api/v1/room';
 
 export default function Sidebar() {
-    
+    const [room, setRoom] = useState([{}])
+
+    useEffect(() => {
+        const getApiData = async () => {
+            const response = await fetch(
+                API_URL
+            ).then((response) => response.json());
+            setRoom(response);
+        }
+        getApiData();
+
+    }, [])
+
     const logout = () => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');
@@ -31,15 +43,13 @@ export default function Sidebar() {
                 <h3 className='title'></h3>
                 <div className='title'>🌐═══๑۩ Room ۩๑═══🌐</div>
                 <ul className='List'>
-                    {SidebarData.map((val, key) => {
+                    {room.map((val, key) => {
                         return (
                             <li
                                 key={key}
                                 className='row'
-                                id={window.location.pathname == val.link ? "active" : ""}
-                                onClick={() => { window.location.pathname = val.link }}>
-
-                                <div id='title'>{val.title}</div>
+                                onClick={() => { }}>
+                                <div id='title'>{val.name}</div>
                             </li>)
                     })
                     }

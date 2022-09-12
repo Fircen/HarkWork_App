@@ -6,7 +6,7 @@ Content-Type: application/json
   
 }
 ###
-GET http://localhost:5000/api/v1/task/
+GET http://localhost:3001/api/v1/room/
 
 ###
 
@@ -14,23 +14,13 @@ GET http://localhost:5000/api/v1/users/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGFraWZham55IiwiZW1haWwiOiJ0YWtpZmFqbnlAZ21haWwuY29tIiwiaWF0IjoxNjYyNTg4MjA2LCJleHAiOjE2NjI1ODkxMDZ9.MyU8s9_GYYr9hzU61WpfUCt6Cnv88NXiibKhUy-NJX4
 
 ### REGISTER
-POST http://localhost:5000/api/v1/users/register
+POST http://localhost:3001/api/v1/room
 Content-Type: application/json
 
 {
-    "name":"Adam",
-    "email":"adkowal777@gmail.com",
-    "password":"1234"
+    "name":"Dzika strefa rozrywki"
 }
 
-### LOGIN
-POST http://localhost:5000/api/v1/auth/login
-Content-Type: application/json
-
-{
-    "email":"takifajny@gmail.com",
-    "password":"Siema123d!"
-}
 
 ### LOGOUT
 DELETE http://localhost:5000/api/v1/auth/logout
