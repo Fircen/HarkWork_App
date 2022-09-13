@@ -34,7 +34,7 @@ export const updateRoom = async (req, res) => {
     try {
         const result = await pool.query('UPDATE room SET name=$1 WHERE "ID"=$2',
             [req.body.name, req.params.id])
-        res.status(200).json(result).send({ message: "Succes updated" })
+        res.status(200).send({ message: "Succes updated" })
     } catch (err) {
         console.log(err)
     }

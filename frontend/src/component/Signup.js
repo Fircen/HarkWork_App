@@ -102,7 +102,7 @@ export default function Signup() {
                                 {errors.password_repeat && <span className='text-danger fs-5'>{errors.password_repeat.message} </span>}
                             </Form.Group>
 
-                            <Button className='w-100 btn-lg' type='submit'>Login</Button>
+                            <Button className='w-100 btn-lg' type='submit'>Sign Up</Button>
                         </Form>
                     </Card.Body>
                     <div className='w-100 text-center mb-4 fs-5 py-3'>

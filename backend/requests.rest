@@ -1,24 +1,33 @@
-PATCH     http://localhost:3000/api/v1/task/2
+PATCH     http://localhost:3001/api/v1/task/2
 Content-Type: application/json
+
 {
-  
   "done": true
-  
 }
+
 ###
-GET http://localhost:3001/api/v1/task/list
+GET http://localhost:3001/api/v1/task/list/
+
+
+
 
 ###
 
-GET http://localhost:5000/api/v1/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGFraWZham55IiwiZW1haWwiOiJ0YWtpZmFqbnlAZ21haWwuY29tIiwiaWF0IjoxNjYyNTg4MjA2LCJleHAiOjE2NjI1ODkxMDZ9.MyU8s9_GYYr9hzU61WpfUCt6Cnv88NXiibKhUy-NJX4
+POST http://localhost:3001/api/v1/task/list
+Content-Type: application/json
+
+{
+    "name": "dsadas" 
+}
+### del
+DELETE http://localhost:3001/api/v1/task/list/12
 
 ### REGISTER
-POST http://localhost:3001/api/v1/room
+GET http://localhost:3001/api/v1/task/list/1
 Content-Type: application/json
 
 {
-    "name":"Dzika strefa rozrywki"
+    "description":"Dzika strefa rozrywki"
 }
 
 

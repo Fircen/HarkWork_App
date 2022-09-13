@@ -5,12 +5,16 @@ import {
     getAllFromList,
     createTaskList,
     getAllList,
+    deleteList,
+    doneTask,
     updateTask,
-    getTask,
-    deleteTask
+    deleteTask,
+    createTask
 } from '../controllers/task.js';
 
-router.route('/', authenticateToken).post(createTaskList).get(getAllFromList)
-router.route('/list', authenticateToken).get(getAllList)
-router.route('/:id').get(getTask).patch(updateTask).delete(deleteTask)
+router.route('/list/:id').get(getAllFromList).post(createTask).delete(deleteList)
+router.route('/:id-:done').patch(doneTask)
+router.route('/list').get(getAllList).post(createTaskList)
+router.route('/:id').delete(deleteTask).patch(updateTask)
+
 export default router
