@@ -17,6 +17,8 @@ export default function App() {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path='/' element={<Home />} />
+          <Route path='/room/:id' element={<Home typeOfContent='room' />} />
+          <Route path='/tasklist/:id' element={<Home typeOfContent='tasklist' />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />

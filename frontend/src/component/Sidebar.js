@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Sidebar_style from '../style/Sidebar_style.css'
 import { Form, Button, Card, Container } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 const API_URL = 'http://localhost:3001/api/v1/room';
 
 export default function Sidebar() {
@@ -29,7 +30,7 @@ export default function Sidebar() {
     }, [])
 
 
-
+    const navigate = useNavigate();
 
 
     const logout = () => {
@@ -55,7 +56,7 @@ export default function Sidebar() {
                             <li
                                 key={key}
                                 className='row'
-                                onClick={() => { }}>
+                                onClick={() => {navigate('/tasklist/'+val.list_id)}}>
                                 <div id='title'>{val.name}</div>
                             </li>)
                     })
@@ -70,7 +71,7 @@ export default function Sidebar() {
                             <li
                                 key={key}
                                 className='row'
-                                onClick={() => { }}>
+                                onClick={() => {navigate('/room/'+val.id)}}>
                                 <div id='title'>{val.name}</div>
                             </li>)
                     })
