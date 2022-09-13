@@ -6,13 +6,12 @@ import { Form, Button, Card, Container } from 'react-bootstrap';
 import moment from 'moment'
 import socket from '../utilty/Socket.js'
 
-export default function Content() {
+export default function RoomContent(props) {
     const [msg, setMsg] = useState('');
     const [msgList, setMsgList] = useState([]);
-    const room = 'room1';
+    //const room = 'room1';
+    const room = props.id;
     const user = localStorage.getItem('user');
-
-
 
     const sendMessage = async (e) => {
         e.preventDefault();
