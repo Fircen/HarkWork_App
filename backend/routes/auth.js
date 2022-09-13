@@ -1,10 +1,6 @@
 import express from 'express';
 const router = express.Router()
 
-// const {
-//     loginUser, 
-//     refreshToken, 
-//     logoutUser} = require('../controllers/auth.js');
 
 import {
     loginUser, 

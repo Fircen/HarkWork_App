@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Button, Card, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-const API_URL = 'http://127.0.0.1:5000/api/v1/users/register';
+const API_URL = 'http://localhost:3001/api/v1/users/register';
 
 async function loginUser(credentials) {
     return fetch(API_URL, {
@@ -25,8 +25,7 @@ export default function Signup() {
             password: data.password
         }
 
-
-        await console.log(nazwa)
+        await loginUser(nazwa)
 
     }
 

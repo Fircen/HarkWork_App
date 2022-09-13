@@ -1,11 +1,21 @@
+///
 import express from 'express';
-const app = express()
 import dotenv from 'dotenv';
+import cors from 'cors';
+///Routes
 import task from './routes/task.js';
 import auth from './routes/auth.js';
 import users from './routes/users.js';
+import room from './routes/room.js';
+
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+
+//server
+const app = express()
+const server = createServer(app);
 
 //middleware
 app.use(express.json())
@@ -18,5 +28,29 @@ dotenv.config();
 app.use('/api/v1/task', task)
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/users', users)
+app.use('/api/v1/room', room)
 // server
-app.listen(5000)
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ['GET', 'POST'],
+    }
+})
+var data;
+io.on('connection', function (socket) {
+    socket.on('join_room', (data) => {
+        socket.join(data)
+        console.log('Socket with id:' + socket.id + 'joined room:' + data)
+    })
+
+    socket.on('send_message', (data) => {
+        console.log(data)
+        socket.to(data.room).emit('receive_message', data)
+    });
+})
+
+
+
+server.listen(3001, () => {
+    console.log("server Run on 3001")
+})
