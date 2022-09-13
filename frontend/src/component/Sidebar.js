@@ -5,17 +5,32 @@ const API_URL = 'http://localhost:3001/api/v1/room';
 
 export default function Sidebar() {
     const [room, setRoom] = useState([{}])
-
+    const [task, setTask] = useState([{}])
     useEffect(() => {
         const getApiData = async () => {
             const response = await fetch(
-                API_URL
+                'http://localhost:3001/api/v1/room'
             ).then((response) => response.json());
             setRoom(response);
         }
         getApiData();
 
     }, [])
+
+    useEffect(() => {
+        const getApiData = async () => {
+            const response = await fetch(
+                'http://localhost:3001/api/v1/task/list'
+            ).then((response) => response.json());
+            setTask(response);
+        }
+        getApiData();
+
+    }, [])
+
+
+
+
 
     const logout = () => {
         localStorage.removeItem('accessToken');
@@ -35,13 +50,20 @@ export default function Sidebar() {
                 <hr />
                 <div className='title'>🌐═══๑۩ Task ۩๑═══🌐</div>
                 <ul className='List'>
-                    <li className='row'> <div id='title'>Task1 </div></li>
-                    <li className='row'> <div id='title'>Task1 </div></li>
-                    <li className='row'> <div id='title'>Task1 </div></li>
-                    <li className='row'> <div id='title'>Task1 </div></li>
+                    {task.map((val, key) => {
+                        return (
+                            <li
+                                key={key}
+                                className='row'
+                                onClick={() => { }}>
+                                <div id='title'>{val.name}</div>
+                            </li>)
+                    })
+                    }
                 </ul>
                 <h3 className='title'></h3>
                 <div className='title'>🌐═══๑۩ Room ۩๑═══🌐</div>
+                <div className='title'><span onClick={() => { }}>Add Room</span></div>
                 <ul className='List'>
                     {room.map((val, key) => {
                         return (

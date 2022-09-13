@@ -6,9 +6,6 @@ import { Form, Button, Card, Container } from 'react-bootstrap';
 import moment from 'moment'
 import socket from '../utilty/Socket.js'
 
-
-
-
 export default function Content() {
     const [msg, setMsg] = useState('');
     const [msgList, setMsgList] = useState([]);
@@ -51,8 +48,6 @@ export default function Content() {
                         <Message key={key} user={val.user} text={val.message} date={val.time} />
                     )
                 })}
-
-
             </div>
             <div className='form-container'>
                 <form className='form' onSubmit={sendMessage}>
