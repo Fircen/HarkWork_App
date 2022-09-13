@@ -56,7 +56,7 @@ export default function Sidebar() {
                             <li
                                 key={key}
                                 className='row'
-                                onClick={() => {navigate('/tasklist/'+val.id)}}>
+                                onClick={() => {navigate('/tasklist/'+val.list_id)}}>
                                 <div id='title'>{val.name}</div>
                             </li>)
                     })

@@ -9,8 +9,8 @@ import socket from '../utilty/Socket.js'
 export default function TaskContent(props) {
     const [task, setTask] = useState('');
     const [taskList, setTaskList] = useState([]);
-    //const task = 'Basic';
-    const tskList = props.id;
+    const tskList = 'Basic';
+    //const tskList = props.id;
     const user = localStorage.getItem('user');
 
     const getTasks = async (e) => {

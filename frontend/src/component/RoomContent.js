@@ -9,15 +9,26 @@ import socket from '../utilty/Socket.js'
 export default function RoomContent(props) {
     const [msg, setMsg] = useState('');
     const [msgList, setMsgList] = useState([]);
-    //const room = 'room1';
-    const room = props.id;
+    const [roomName, setRoomName] = useState('');
+    //const room = 'Basic';
     const user = localStorage.getItem('user');
+
+    useEffect(() => {
+        const getApiData = async () => {
+            const response = await fetch(
+                'http://localhost:3001/api/v1/room/' + props.id
+            ).then((response) => response.json());
+            setRoomName(response.data.name);
+        }
+        getApiData();
+
+    }, [])
 
     const sendMessage = async (e) => {
         e.preventDefault();
         if (sendMessage !== "") {
             const messageData = {
-                room: room,
+                room: roomName,
                 user: user,
                 message: msg,
                 time: moment().format('h:mm a')
