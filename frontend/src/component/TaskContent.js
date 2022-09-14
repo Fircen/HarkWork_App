@@ -12,52 +12,39 @@ export default function TaskContent(props) {
     const tskList = 'Basic';
     //const tskList = props.id;
     const user = localStorage.getItem('user');
-
-    const getTasks = async (e) => {
-        e.preventDefault();
-
+    const getApiData = async () => {
+        const response = await fetch(
+            'http://localhost:3001/api/v1/task/list/' + props.id
+        ).then((response) => response.json());
+        setTaskList(response);
+    }
+    const createTask = async () => {
+        //e.preventDefault();
+        const response = await fetch('http://localhost:3001/api/v1/task/list/' + props.id, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ description: task })
+        })
+        setTask('');
+        getApiData();
     }
 
-    const createTask = async (e) => {
-        e.preventDefault();
-
+    const updateTask = async (id, done) => {
+        const response = await fetch('http://localhost:3001/api/v1/task/' + id + '-' + !done, { method: 'PATCH' })
+        getApiData();
     }
 
-    const updateTask = async (e, id) => {
-        e.preventDefault();
-
+    const deleteTask = async (id) => {
+        //e.preventDefault();
+        await fetch('http://localhost:3001/api/v1/task/' + id, { method: 'DELETE' });
+        getApiData();
     }
-
-    const deleteTask = async (e, id) => {
-        e.preventDefault();
-
-        await fetch.delete('http://localhost:3001/api/v1/task/' + id, {method: 'DELETE'});
-        setTaskList(taskList.filter((task) => task.id !== id));
-    }
-
-    // const sendMessage = async (e) => {
-    //     e.preventDefault();
-    //     if (sendMessage !== "") {
-    //         const messageData = {
-    //             room: room,
-    //             user: user,
-    //             message: msg,
-    //             time: moment().format('h:mm a')
-    //         }
-    //         await socket.emit('send_message', messageData)
-    //         setMsgList((list) => [...list, messageData]);
-
-    //     }
-    //     setMsg('');
-    // }
-
-    // useEffect(
-    //     () => {
-    //         socket.off('receive_message').on('receive_message', (data) => {
-
-    //             setMsgList((list) => [...list, data])
-    //         })
-    //     }, [socket])
+    useEffect(() => {
+        getApiData();
+    }, [props.id])
 
 
 
@@ -66,7 +53,7 @@ export default function TaskContent(props) {
             <div className='tasks'>
                 {taskList.map((val, key) => {
                     return (
-                        <Task key={key} desc={val.description} done={val.done} onDone={() => updateTask(val.id)} onDelete={() => deleteTask(val.id)} />
+                        <Task key={key} desc={val.description} done={val.done} onDone={() => updateTask(val.task_id, val.done)} onDelete={() => deleteTask(val.task_id)} />
                     )
                 })}
             </div>

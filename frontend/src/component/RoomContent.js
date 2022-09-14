@@ -35,7 +35,6 @@ export default function RoomContent(props) {
             }
             await socket.emit('send_message', messageData)
             setMsgList((list) => [...list, messageData]);
-
         }
         setMsg('');
     }
@@ -43,7 +42,6 @@ export default function RoomContent(props) {
     useEffect(
         () => {
             socket.off('receive_message').on('receive_message', (data) => {
-
                 setMsgList((list) => [...list, data])
             })
         }, [socket])

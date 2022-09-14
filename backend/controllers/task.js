@@ -22,7 +22,7 @@ export const getAllList = async (req, res) => {
 };
 export const getAllFromList = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM task_list INNER JOIN task USING (list_id) WHERE list_id=$1;', [req.params.id])
+        const result = await pool.query('SELECT * FROM task_list INNER JOIN task USING (list_id) WHERE list_id=$1 ORDER BY task_id;', [req.params.id])
         res.status(200).json(result.rows)
     }
     catch (err) {

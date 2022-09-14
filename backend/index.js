@@ -15,7 +15,7 @@ import { Server } from "socket.io";
 
 //server
 const app = express()
-const server = createServer(app);
+export const server = createServer(app);
 
 //middleware
 app.use(express.json())
@@ -32,11 +32,11 @@ app.use('/api/v1/room', room)
 // server
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*",
         methods: ['GET', 'POST'],
     }
 })
-var data;
+
 io.on('connection', function (socket) {
     socket.on('join_room', (data) => {
         socket.join(data)

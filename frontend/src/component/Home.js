@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from './Sidebar';
-import OnlineUsers from './Online';
+
 import RoomContent from './RoomContent';
 import Middle_style from '../style/Middle.css';
 import Sidebar_style from '../style/Sidebar_style.css'
@@ -19,7 +19,7 @@ export default function Home(props) {
             {/* <RoomContent /> */}
             {/* <TaskContent /> */}
             {props.typeOfContent == 'room' ? <RoomContent id={id}/> : <TaskContent id={id}/>}
-            <OnlineUsers />
+           {/* <OnlineUsers />*/}
         </>
     )
 }
